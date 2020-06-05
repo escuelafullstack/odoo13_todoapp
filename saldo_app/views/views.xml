@@ -1,0 +1,39 @@
+<odoo>
+    <!--Acciones de Ventana-->
+    <record id="action_view_movimiento" model="ir.actions.act_window">
+        <field name="name">Movimientos</field>
+        <field name="res_model">sa.movimiento</field>
+    </record>
+
+    <record id="action_view_categoria" model="ir.actions.act_window">
+        <field name="name">Categorias</field>
+        <field name="res_model">sa.category</field>
+    </record>
+
+    <record id="action_view_tag" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">sa.tag</field>
+    </record>
+
+    <!-- Menús -->
+
+    <menuitem id="menu_main_saldoapp" 
+                name="Saldo APP" 
+                parent="" 
+                action="saldo_app.action_view_movimiento"/>
+    
+    <menuitem id="menu_movimiento" 
+                name="Movimientos" 
+                parent="saldo_app.menu_main_saldoapp" 
+                action="saldo_app.action_view_movimiento"/>
+
+    <menuitem id="menu_categorias" 
+                name="Categorias" 
+                parent="saldo_app.menu_main_saldoapp" 
+                action="saldo_app.action_view_categoria"/>
+
+    <menuitem id="menu_tag" 
+                name="Etiquetas" 
+                parent="saldo_app.menu_main_saldoapp" 
+                action="saldo_app.action_view_tag"/>                
+</odoo>
