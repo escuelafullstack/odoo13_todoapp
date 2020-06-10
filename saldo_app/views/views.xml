@@ -1,4 +1,73 @@
 <odoo>
+    <!--Vistas-->
+    <record id="view_form_movimiento" model="ir.ui.view">
+        <field name="name">view.form.sa.movimiento</field>
+        <field name="model">sa.movimiento</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="type_move" widget="radio" required="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="amount" required="1" widget="monetary" options="{'currency_field':'currency_id'}"/>
+                            <field name="date" required="1"/>
+                        </group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="category_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notas"/>
+                        <field name="receipt_image" widget="image"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_movimiento" model="ir.ui.view">
+        <field name="name">view.tree.sa.movimiento</field>
+        <field name="model">sa.movimiento</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="type_move == 'ingreso'" decoration-danger="type_move == 'gasto'">
+                <field name="date" optional="show"/>
+                <field name="name" />
+                <field name="type_move"  optional="show"/>
+                <field name="amount" widget="monetary" options="{'currency_field':'currency_id'}"  optional="show"/>
+                <field name="tag_ids" optional="hide" widget="many2many_tags" string="Etiquetas"/>
+                <field name="category_id" optional="hide"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_search_movimiento" model="ir.ui.view">
+        <field name="name">view.search.sa.movimiento</field>
+        <field name="model">sa.movimiento</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="notas"/>
+                <field name="category_id"/>
+                <field name="tag_ids"/>
+
+                <filter name="filter_ingresos" string="Ingresos" domain="[('type_move','=','ingreso')]"/>
+                <filter name="filter_gastos" string="Gastos" domain="[('type_move','=','gasto')]"/>
+                <separator/>
+                <filter name="filter_today" string="Hoy" date="create_date" default_period="today"/>
+                <filter name="filter_this_week" string="Esta Semana" date="create_date" default_period="this_week"/>
+                <filter name="filter_this_month" string="Esta Mes" date="create_date" default_period="this_month"/>
+            </search>
+        </field>
+    </record>
     <!--Acciones de Ventana-->
     <record id="action_view_movimiento" model="ir.actions.act_window">
         <field name="name">Movimientos</field>
@@ -15,6 +84,10 @@
         <field name="res_model">sa.tag</field>
     </record>
 
+    <record id="action_view_currency" model="ir.actions.act_window">
+        <field name="name">Monedas</field>
+        <field name="res_model">res.currency</field>
+    </record>
     <!-- Menús -->
 
     <menuitem id="menu_main_saldoapp" 
@@ -27,13 +100,22 @@
                 parent="saldo_app.menu_main_saldoapp" 
                 action="saldo_app.action_view_movimiento"/>
 
+    <menuitem id="menu_ajustes"
+              name="Ajustes"
+              parent="saldo_app.menu_main_saldoapp"
+              action="saldo_app.action_view_categoria"/> 
+
     <menuitem id="menu_categorias" 
                 name="Categorias" 
-                parent="saldo_app.menu_main_saldoapp" 
+                parent="saldo_app.menu_ajustes" 
                 action="saldo_app.action_view_categoria"/>
 
     <menuitem id="menu_tag" 
                 name="Etiquetas" 
-                parent="saldo_app.menu_main_saldoapp" 
-                action="saldo_app.action_view_tag"/>                
+                parent="saldo_app.menu_ajustes" 
+                action="saldo_app.action_view_tag"/>   
+    <menuitem id="menu_currency"
+                name="Moneda"
+                parent="saldo_app.menu_ajustes"
+                action="action_view_currency"/>             
 </odoo>
