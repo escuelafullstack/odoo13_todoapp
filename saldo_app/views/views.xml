@@ -59,12 +59,22 @@
                 <field name="category_id"/>
                 <field name="tag_ids"/>
 
-                <filter name="filter_ingresos" string="Ingresos" domain="[('type_move','=','ingreso')]"/>
-                <filter name="filter_gastos" string="Gastos" domain="[('type_move','=','gasto')]"/>
+                <filter name="filter_tipo_ingresos" 
+                        string="Ingresos" 
+                        domain="[('type_move','=','ingreso')]"/>
+                <filter name="filter_tipo_gastos" 
+                        string="Gastos" 
+                        domain="[('type_move','=','gasto')]"/>
                 <separator/>
-                <filter name="filter_today" string="Hoy" date="create_date" default_period="today"/>
-                <filter name="filter_this_week" string="Esta Semana" date="create_date" default_period="this_week"/>
-                <filter name="filter_this_month" string="Esta Mes" date="create_date" default_period="this_month"/>
+                <filter name="filter_today" string="Hoy"
+                        domain="[('date','&gt;=',datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date','&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]"/>
+                <filter name="filter_this_week" string="Últimos 7 días"
+                        domain="[('date','&lt;=',context_today().strftime('%Y-%m-%d 23:59:59')),('date','&gt;=',(context_today()-datetime.timedelta(days=7)).strftime('%Y-%m-%d 00:00:00'))]"/>
+
+                <filter name="group_type_move" string="Tipo" 
+                        context="{'group_by':'type_move'}"/>
+                <filter name="group_date" string="Fecha" 
+                        context="{'group_by':'date'}"/>
             </search>
         </field>
     </record>
