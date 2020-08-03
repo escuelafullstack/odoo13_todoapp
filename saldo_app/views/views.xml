@@ -78,6 +78,21 @@
             </search>
         </field>
     </record>
+
+    <record id="view_form_category" model="ir.ui.view">
+        <field name="name">view.form.category</field>
+        <field name="model">sa.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <button name="ver_movimientos" type="object" string="Ver Movimientos"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
     <!--Acciones de Ventana-->
     <record id="action_view_movimiento" model="ir.actions.act_window">
         <field name="name">Movimientos</field>
