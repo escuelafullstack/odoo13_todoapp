@@ -7,11 +7,12 @@
             <form>
                 <sheet>
                     <group>
+                        <field name="type_move" widget="radio" required="1"/>
                         <field name="name" required="1"/>
                     </group>
                     <group>
                         <group>
-                            <field name="type_move" widget="radio" required="1"/>
+                            
                             <field name="currency_id" invisible="1"/>
                             <field name="amount" required="1" widget="monetary" options="{'currency_field':'currency_id'}"/>
                             <field name="date" required="1"/>
@@ -19,6 +20,8 @@
                         <group>
                             <field name="tag_ids" widget="many2many_tags"/>
                             <field name="category_id"/>
+                            <field name="user_id"/>
+                            <field name="email"/>
                         </group>
                     </group>
                     <group>
@@ -93,6 +96,23 @@
             </form>
         </field>
     </record>
+
+    <record id="view_res_users_add_movimientos" model="ir.ui.view">
+        <field name="name">view.res.users.add.movimientos</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_simple_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="sheet" position="inside">
+                <group>
+                    <field name="email"/>
+                    <field name="movimiento_ids"/>
+                    <field name="total_ingresos"/>
+                    <field name="total_egresos"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
     <!--Acciones de Ventana-->
     <record id="action_view_movimiento" model="ir.actions.act_window">
         <field name="name">Movimientos</field>
@@ -113,7 +133,19 @@
         <field name="name">Monedas</field>
         <field name="res_model">res.currency</field>
     </record>
+
+    <record id="action_server_mi_cuenta" model="ir.actions.server">
+        <field name="name">Mi Cuenta</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="state">code</field>
+        <field name="code">action = model.mi_cuenta()</field>
+    </record>
+    
     <!-- Menús -->
+    <menuitem id="menu_mi_cuenta"
+                name="Mi cuenta"
+                parent=""
+                action="saldo_app.action_server_mi_cuenta"/>
 
     <menuitem id="menu_main_saldoapp" 
                 name="Saldo APP" 
