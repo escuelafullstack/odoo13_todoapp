@@ -1,0 +1,40 @@
+<odoo>
+    <record id="ir_rule_user_free_mostrar_mov_propios" model="ir.rule">
+        <field name="name">Mostrar movimientos propios</field>
+        <field name="model_id" ref="saldo_app.model_sa_movimiento"/>
+        <field name="domain_force">
+            [('create_uid','=',user.id)]
+        </field>
+        <field name="groups" eval="[(4,ref('saldo_app.res_groups_user_free')),(4,ref('saldo_app.res_groups_user_premium'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+
+    <record id="ir_rule_user_free_mostrar_categorias_propias" model="ir.rule">
+        <field name="name">Mostrar Cagetorias propios</field>
+        <field name="model_id" ref="saldo_app.model_sa_category"/>
+        <field name="domain_force">
+            [('create_uid','=',user.id)]
+        </field>
+        <field name="groups" eval="[(4,ref('saldo_app.res_groups_user_free')),(4,ref('saldo_app.res_groups_user_premium'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+    
+    <record id="ir_rule_user_free_mostrar_tags_propias" model="ir.rule">
+        <field name="name">Mostrar Etiquetas propios</field>
+        <field name="model_id" ref="saldo_app.model_sa_tag"/>
+        <field name="domain_force">
+            [('create_uid','=',user.id)]
+        </field>
+        <field name="groups" eval="[(4,ref('saldo_app.res_groups_user_free')),(4,ref('saldo_app.res_groups_user_premium'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+</odoo>

@@ -27,8 +27,8 @@
                                     domain="[('type_move','=', type_move)]" 
                                     options="{'no_open':True}"
                                     context="{'default_type_move':type_move,'default_name':'Nueva categoria'}"/>
-                            <field name="user_id"/>
-                            <field name="email"/>
+                            <field name="user_id" groups="saldo_app.res_groups_administrador"/>
+                            <field name="email" groups="saldo_app.res_groups_administrador"/>
                         </group>
                     </group>
                     <group>
@@ -100,6 +100,7 @@
                 <field name="tag_ids" optional="hide" widget="many2many_tags" string="Etiquetas"/>
                 <field name="category_id" optional="hide"/>
                 <field name="currency_id" invisible="1"/>
+                <field name="create_uid" groups="saldo_app.res_groups_administrador"/>
             </tree>
         </field>
     </record>
@@ -198,6 +199,7 @@
                 <group>
                     <field name="email"/>
                     <field name="movimiento_ids"/>
+                    <field name="count_movimientos"/>
                     <field name="total_ingresos"/>
                     <field name="total_egresos"/>
                 </group>
@@ -251,7 +253,7 @@
     <record id="action_view_movimiento" model="ir.actions.act_window">
         <field name="name">Movimientos</field>
         <field name="res_model">sa.movimiento</field>
-        <field name="limit">4</field>
+        <field name="limit">80</field>
     </record>
 
     <record id="action_view_categoria" model="ir.actions.act_window">

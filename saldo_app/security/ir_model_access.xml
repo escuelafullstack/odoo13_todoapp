@@ -28,4 +28,36 @@
         <field name="perm_unlink" eval="1"/>
         <field name="perm_read" eval="1"/>
     </record>
+
+
+    <!--Usuario FREE-->
+    <record id="model_access_group_free_movimiento" model="ir.model.access">   
+        <field name="name">model.access.groups.free.movimiento</field>
+        <field name="model_id" ref="saldo_app.model_sa_movimiento"/>
+        <field name="group_id" ref="saldo_app.res_groups_user_free"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+
+    <record id="model_access_group_free_categoria" model="ir.model.access">   
+        <field name="name">model.access.groups.free.categoria</field>
+        <field name="model_id" ref="saldo_app.model_sa_category"/>
+        <field name="group_id" ref="saldo_app.res_groups_user_free"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+
+    <record id="model_acces_group_free_tags" model="ir.model.access">   
+        <field name="name">model.access.groups.free.tags</field>
+        <field name="model_id" ref="saldo_app.model_sa_tag"/>
+        <field name="group_id" ref="saldo_app.res_groups_user_free"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="perm_read" eval="1"/>
+    </record>
 </odoo>
