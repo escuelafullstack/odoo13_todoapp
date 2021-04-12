@@ -1,0 +1,24 @@
+<odoo>
+    <record id="saldo_app.paperformat_portrait_a5" model="report.paperformat" >
+        <field name="name">Formato A5</field>
+        <field name="format">A5</field>
+        <field name="orientation">Portrait</field>
+        <field name="default" eval="False" />
+        <field name="dpi" eval="90" />
+        <field name="margin_top" eval="40" />
+        <field name="margin_right" eval="7" />
+        <field name="margin_bottom" eval="20" />
+        <field name="margin_left" eval="7" />
+        <field name="header_line" eval="False" />
+        <field name="header_spacing" eval="35" />
+    </record>
+
+    <report id="saldo_app.action_report_detalle_movimiento"
+            string="Detalle de Movimiento"
+            model="sa.movimiento"
+            report_type="qweb-pdf"
+            paperformat="saldo_app.paperformat_portrait_a5"
+            name="saldo_app.report_detalle_movimiento"
+            print_report_name="'Detalle de movimiento %s' % (object.name)"/>
+            
+</odoo>
